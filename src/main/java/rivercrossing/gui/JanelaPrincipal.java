@@ -44,7 +44,7 @@ public class JanelaPrincipal extends JFrame{
 			}
 		});
 		
-		var painel = new PainelControle();
+		PainelControle painel = new PainelControle();
 		
 		janelaPrincipal.add(painel);
 		janelaPrincipal.setVisible(true);

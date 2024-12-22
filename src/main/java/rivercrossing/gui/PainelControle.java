@@ -216,7 +216,7 @@ public class PainelControle extends JPanel {
 	
 	private class AtravessarListener implements ActionListener{
 		public void actionPerformed(ActionEvent e) {
-			var retorno = desafio.atravessar();
+			String retorno = desafio.atravessar();
 			txtAreaJogo.append("\n"+retorno);
 			
 			
