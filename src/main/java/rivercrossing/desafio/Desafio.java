@@ -30,76 +30,73 @@ public class Desafio {
 		rio.receber(repolho, barco.getLocalizacao());
 	}
 	
-	public void estadoAtual() {
+	public String estadoAtual() {
+		StringBuilder txtEstadoJogo = new StringBuilder();
 		
-		String txtOcupante = barco.getOcupante() != null  ? (" com " + barco.getOcupante().identificar()) : " sem carga";
-		System.out.println("------------------------------------");
-		System.out.println("\n\nEstado Atual do Desafio\n"
-				+ "------------------------------------");
-		System.out.println("Barco localizado na margem " + barco.getLocalizacao() + txtOcupante);
-		System.out.println("Rio:");
-		System.out.println("\t Margem Leste: ");
-		
+		String txtOcupante = barco.getOcupante() != null  ? (" com " + barco.getOcupante().identificar()) : " sem carga";	
+		txtEstadoJogo.append("Estado atual do Desafio:\n");
+		txtEstadoJogo.append("\nBarco localizado na margem " + barco.getLocalizacao() + txtOcupante);
+		txtEstadoJogo.append("\nRio:");
+		txtEstadoJogo.append("\n\t Margem Leste: ");
 		for(Elemento e : rio.getMargemLeste().getElementos()) {
-			System.out.println("\t\t\t" + e.identificar());
+			txtEstadoJogo.append("\n\t\t\t" + e.identificar());
+		}
+		txtEstadoJogo.append("\n\t Margem Oeste: ");
+		for(Elemento e : rio.getMargemOeste().getElementos()) {
+			txtEstadoJogo.append("\n\t\t\t" + e.identificar());
 		}
 		
-		System.out.println("\t Margem Oeste: ");
-		for(Elemento e : rio.getMargemOeste().getElementos()) {
-			System.out.println("\t\t\t" + e.identificar());
-		}
-		System.out.println("------------------------------------");
+		System.out.println(txtEstadoJogo.toString());
+		return txtEstadoJogo.toString();
 	}
 	
-	public void embarcarOvelha() {
-		if(!validarEmbarque(ovelha,barco)) {
-			System.out.println("Ovelha não está na margem " + barco.getLocalizacao());
+	public String embarcarOvelha() {
+		if(validarEmbarque(ovelha,barco)) {
+			return "Ovelha entrou no barco!";
 		}
+		return("Ovelha não está na margem "  + barco.getLocalizacao());
 	}
 	
-	public void embarcarLobo() {
-		if(!validarEmbarque(lobo,barco)) {
-			System.out.println("Lobo não está na margem " + barco.getLocalizacao());
+	public String embarcarLobo() {
+		if(validarEmbarque(lobo,barco)) {
+			return "Lobo entrou no barco!";
 		}
+		return "Lobo não está na margem " + barco.getLocalizacao();
 	}
 	
-	public void embarcarRepolho() {
-		if (!validarEmbarque(repolho,barco)) {
-			System.out.println("Repolho não está na margem " + barco.getLocalizacao());
+	public String embarcarRepolho() {
+		if (validarEmbarque(repolho,barco)) {
+			return "Repolho entrou no barco!";
 		}
+		return "Lobo não está na margem " + barco.getLocalizacao();
 	}
 	
-	public void desembarcarOvelha() {
+	public String desembarcarOvelha() {
 		if(!(barco.getOcupante() instanceof Ovelha)) {
-			System.out.println("Ovelha não está no barco!");
-			return;
+			return "Ovelha não está no barco!";
 		}
-		desembarcar(ovelha,barco);
+		return desembarcar(ovelha,barco);
 	}
 	
-	public void desembarcarLobo() {
+	public String desembarcarLobo() {
 		if(!(barco.getOcupante() instanceof Lobo)) {
-			System.out.println("Lobo não está no barco!");
-			return;
+			return "Lobo não está no barco!";
 		}
-		desembarcar(lobo,barco);
+		return desembarcar(lobo,barco);
 	}
 	
-	public void desembarcarRepolho() {
+	public String desembarcarRepolho() {
 		if(!(barco.getOcupante() instanceof Repolho)) {
-			System.out.println("Repolho não está no barco!");
-			return;
+			return "Repolho não está no barco!";
 		}
-		desembarcar(repolho,barco);
+		return desembarcar(repolho,barco);
 	}
 	
-	public boolean atravessar() {
+	public String atravessar() {
 		if(validarDesafio()) {
-			barco.atravessarRio();
-			return true;
+			return barco.atravessarRio();
 		}
-		System.out.println("Perdeu!!!!");
-		return false;
+		return "PERDEU";
 	}
 
 	public boolean validarDesafio() {
@@ -115,8 +112,9 @@ public class Desafio {
 		return true;
 	}
 	
-	private void desembarcar(Elemento elemento, Barco barco) {
+	private String desembarcar(Elemento elemento, Barco barco) {
 		barco.descarregarBarco();
 		rio.receber(elemento, barco.getLocalizacao());
+		return elemento.identificar() + " saiu do barco";
 	}
 }

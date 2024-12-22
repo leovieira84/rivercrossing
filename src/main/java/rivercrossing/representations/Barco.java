@@ -29,25 +29,23 @@ public class Barco {
 			System.out.println("O barco está lotado");
 			return;
 		}
-		
 		ocupante = e;
 		System.out.println(e.identificar() + " está no barco!");
-		
 	}
 	
 	public void descarregarBarco() {
 		if(!estaLotado()) {
 			System.out.println("O barco está lotado!!!");
 		}
-		
 		System.out.println(this.ocupante.identificar() + " saiu do barco!");
 		this.ocupante = null;
 	}
 	
-	public void atravessarRio() {
-		System.out.print("Barco atravessando o rio de " + getLocalizacao());
+	public String atravessarRio() {
+		StringBuilder mensagem = new StringBuilder("Barco atravessando o rio de " + getLocalizacao());
 		this.localizacao = this.localizacao == Localizacao.LESTE ? Localizacao.OESTE : Localizacao.LESTE;
-		System.out.println(" para " + getLocalizacao());
+		mensagem.append(" para " + getLocalizacao());
+		return mensagem.toString();
 	}
 	
 	public Elemento getOcupante() {

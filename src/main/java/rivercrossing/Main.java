@@ -3,11 +3,12 @@ package rivercrossing;
 import java.util.Scanner;
 
 import rivercrossing.desafio.Desafio;
+import rivercrossing.gui.JanelaPrincipal;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Desafio desafio = new Desafio();
+		/*Desafio desafio = new Desafio();
 		
 		Scanner entrada = new Scanner(System.in);
 		int opcao;
@@ -41,5 +42,7 @@ public class Main {
 			}
 			
 		} while(opcao != 0);
+		*/
+		JanelaPrincipal main = JanelaPrincipal.getInstance();
 	}
 }
